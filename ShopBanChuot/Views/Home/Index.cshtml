@@ -1,0 +1,54 @@
+﻿@using ShopBanChuot.Models;
+@model  List<SANPHAM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar ================================================== -->
+            @Html.Action("Index","Slidebar")
+            <!-- Sidebar end=============================================== -->
+            <div class="span9">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    @*<ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>*@
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="/SanPham/ThongTinSanPham?MaSP=1"><img src="~/Content/Images/AnhNen1.jpg" alt="Không ảnh"></a>
+                        </div>
+
+                        <div class="item">
+                            <a href="/SanPham/ThongTinSanPham?MaSP=1"><img src="~/Content/Images/AnhNen2.jpg" alt="Không ảnh"></a>
+                        </div>
+
+                        <div class="item">
+                            <a href="/SanPham/ThongTinSanPham?MaSP=1"><img src="~/Content/Images/AnhNen3.jpg" alt="Không ảnh"></a>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Trước</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Sau</span>
+                    </a>
+                </div>
+                @Html.Action("SanPhamNoiBatPartial", "Home")
+                @Html.Action("SanPhamMoiPartial", "Home")
+            </div>
+        </div>
+    </div>
+</div>
+

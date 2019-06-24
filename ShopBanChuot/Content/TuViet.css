@@ -1,0 +1,31 @@
+﻿
+/*css cho ảnh trong thông tin sản phẩm*/
+.Gia
+{
+    text-decoration:line-through;
+
+}
+.GiamGia
+{
+    color: red;
+    font-size:large;
+
+}
+
+#lightbox-container-image-box
+{
+    height:300px;
+    width:300px;
+}
+
+#lightbox-nav-btnNext
+{
+    height:500px;
+    width:500px;
+}
+#lightbox-image
+{
+    height:500px;
+    width:500px;
+}
+/*css cho mấy trang tạo, thêm sửa xóa*/

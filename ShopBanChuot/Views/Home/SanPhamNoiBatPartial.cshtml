@@ -1,0 +1,126 @@
+﻿
+
+<div class="well well-small">
+    <h4>Sản phẩm nổi bật <small class="pull-right"></small></h4>
+    <div class="row-fluid">
+        <div id="featured" class="carousel slide" data-ride="carousel">
+            <div class=" carousel-inner">
+            <div class="item active">
+                <ul class="thumbnails">
+                    @for(int i =0; i<=3; i++)
+                        {
+                        <li class="span3">
+                            <div class="thumbnail" style="height: 390px;">
+                                <a href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = Model[i].MaSP })><img src="@Model[i].Anh1" width="150" height="150" alt="không có ảnh " /></a>
+                                <div class="caption" style="height: 120px;">
+                                    @{
+                                            if (Model[i].TenSP.Length > 35)
+                                            {
+                                                <h5>@Model[i].TenSP.Substring(0, 35)... </h5>
+                                            }
+                                            else
+                                            {
+                                                <h5>@Model[i].TenSP </h5>
+                                            }
+                                        <p class="Gia">Giá cũ:@string.Format("{0:0,0}", Model[i].Gia) VNĐ</p>
+                                        <p class="GiamGia">Giảm còn:@string.Format("{0:0,0}", Model[i].GiamGia) VNĐ</p>
+                                    }
+                                </div>
+
+                                <div class="align-center">
+                                    <h4 style="text-align:center">
+                                        <a class="btn btn-success" style="width:160px;" href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = Model[i].MaSP })>Xem thông tin chi tiết</a>
+                                    </h4>
+                                    <h4 style="text-align:center">
+                                        <a class="btn btn-primary " style="width:160px;" href=@Url.Action("ThemItemGioHang", "GioHang", new { @MaSP =Model[i].MaSP, @strUrl = Request.Url})>Thêm vào giỏ hàng<i class="icon-shopping-cart"></i></a>
+                                    </h4>
+
+                                </div>
+                            </div>
+                        </li>
+                        }
+
+                </ul>
+            </div>
+            <div class="item">
+                    <ul class="thumbnails">
+                        @for (int i = 4; i <= 7; i++)
+                        {
+                            <li class="span3">
+                                <div class="thumbnail" style="height: 390px;">
+                                    <a href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = Model[i].MaSP })><img src="@Model[i].Anh1" width="150" height="150" alt="không có ảnh " /></a>
+                                    <div class="caption" style="height: 120px;">
+                                        @{
+                            if (Model[i].TenSP.Length > 35)
+                            {
+                                <h5>@Model[i].TenSP.Substring(0, 35)... </h5>
+                            }
+                            else
+                            {
+                                <h5>@Model[i].TenSP </h5>
+                            }
+                            <p class="Gia">Giá cũ:@string.Format("{0:0,0}", Model[i].Gia) VNĐ</p>
+                                            <p class="GiamGia">Giảm còn:@string.Format("{0:0,0}", Model[i].GiamGia) VNĐ</p>
+                                        }
+                                    </div>
+
+                                    <div class="align-center">
+                                        <h4 style="text-align:center">
+                                            <a class="btn btn-success" style="width:160px;" href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = Model[i].MaSP })>Xem thông tin chi tiết</a>
+                                        </h4>
+                                        <h4 style="text-align:center">
+                                            <a class="btn btn-primary " style="width:160px;" href=@Url.Action("ThemItemGioHang", "GioHang", new { @MaSP =Model[i].MaSP, @strUrl = Request.Url})>Thêm vào giỏ hàng<i class="icon-shopping-cart"></i></a>
+                                        </h4>
+
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            <div class="item">
+                    <ul class="thumbnails">
+                        @for (int i = 8; i <= 11; i++)
+                        {
+                            <li class="span3">
+                                <div class="thumbnail" style="height: 390px;">
+                                    <a href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = Model[i].MaSP })><img src="@Model[i].Anh1" width="150" height="150" alt="không có ảnh " /></a>
+                                    <div class="caption" style="height: 120px;">
+                                        @{
+                            if (Model[i].TenSP.Length > 35)
+                            {
+                                <h5>@Model[i].TenSP.Substring(0, 35)... </h5>
+                            }
+                            else
+                            {
+                                <h5>@Model[i].TenSP </h5>
+                            }
+                            <p class="Gia">Giá cũ:@string.Format("{0:0,0}", Model[i].Gia) VNĐ</p>
+                                            <p class="GiamGia">Giảm còn:@string.Format("{0:0,0}", Model[i].GiamGia) VNĐ</p>
+                                        }
+                                    </div>
+
+                                    <div class="align-center">
+                                        <h4 style="text-align:center">
+                                            <a class="btn btn-success" style="width:160px;" href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = Model[i].MaSP })>Xem thông tin chi tiết</a>
+                                        </h4>
+                                        <h4 style="text-align:center">
+                                            <a class="btn btn-primary " style="width:160px;" href=@Url.Action("ThemItemGioHang", "GioHang", new { @MaSP =Model[i].MaSP, @strUrl = Request.Url})>Thêm vào giỏ hàng<i class="icon-shopping-cart"></i></a>
+                                        </h4>
+
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+
+        </div>
+            <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
+            <a class="right carousel-control" href="#featured" data-slide="next">›</a>
+        </div>
+    </div>
+</div>
+

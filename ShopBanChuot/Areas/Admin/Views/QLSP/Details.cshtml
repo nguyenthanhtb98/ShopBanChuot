@@ -1,0 +1,155 @@
+﻿@model ShopBanChuot.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+
+<div>
+    <h4>SANPHAM</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiamGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiamGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LuotXem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotXem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh1)
+        </dt>
+
+        <dd>
+            <img src="@Model.Anh1" style="height:100px; width: 100px" alt="Không ảnh" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh2)
+        </dt>
+
+        <dd>
+            <img src="@Model.Anh2" style="height:100px; width: 100px" alt="Không ảnh" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh3)
+        </dt>
+
+        <dd>
+            <img src="@Model.Anh3" style="height:100px; width: 100px" alt="Không ảnh" />
+        </dd>
+
+        <dt>
+            @Html.Raw(Model.MoTa1);
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Moi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Moi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOAISANPHAM.TenLoaiSP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOAISANPHAM.TenLoaiSP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.THUONGHIEU.TenTH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.THUONGHIEU.TenTH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.XUATXU.TenXX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.XUATXU.TenXX)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaSP }) |
+    @Html.ActionLink("Trở về", "Index")
+</p>

@@ -1,0 +1,27 @@
+﻿@model ShopBanChuot.Models.XUATXU
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>XUATXU</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenXX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenXX)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaXX }) |
+    @Html.ActionLink("Trở về", "Index")
+</p>

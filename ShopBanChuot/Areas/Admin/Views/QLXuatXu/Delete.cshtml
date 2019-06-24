@@ -1,0 +1,33 @@
+﻿@model ShopBanChuot.Models.XUATXU
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>XÓA</h2>
+
+<h3>Bạn có chắc muốn xóa không</h3>
+<div>
+    <h4>XUATXU</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenXX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenXX)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Trở về", "Index")
+        </div>
+    }
+</div>

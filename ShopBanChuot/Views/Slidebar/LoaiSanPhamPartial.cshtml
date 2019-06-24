@@ -1,0 +1,12 @@
+﻿@using ShopBanChuot.Models;
+@model List<LOAISANPHAM>
+
+<a> LOẠI CHUỘT </a>
+<ul>
+    @{
+        foreach (var item in Model)
+        {
+            <li><a href=@Url.Action("SanPhamTheoLoaiSanPham", "SanPham", new { @MaLoaiSP = item.MaLoaiSP })><i class="icon-chevron-right"></i>@item.TenLoaiSP</a></li>
+        }
+    }
+</ul>

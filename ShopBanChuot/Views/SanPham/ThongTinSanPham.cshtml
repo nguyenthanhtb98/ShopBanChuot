@@ -1,0 +1,210 @@
+﻿@using ShopBanChuot.Models;
+@model SANPHAM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar ================================================== -->
+            @Html.Action("Index", "Slidebar")
+            <!-- Sidebar end=============================================== -->
+            <div class="span9">
+                @*<ul class="breadcrumb">
+                    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                    <li><a href="products.html">Products</a> <span class="divider">/</span></li>
+                    <li class="active">product Details</li>
+                </ul>*@
+                <div class="row">
+                    <div id="gallery" class="span3">
+                        <a href="@Model.Anh1" title="@Model.TenSP">
+                            <img src="@Model.Anh1" style="width:100%" alt="Không có ảnh">
+                        </a>
+                        <div id="differentview" class="moreOptopm carousel slide">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <a href="@Model.Anh2"> <img style="width:29%" src="@Model.Anh2" alt=""></a>
+                                    <a href="@Model.Anh3"> <img style="width:29%" src="@Model.Anh3" alt=""></a>
+                                </div>
+                                @*<div class="item">
+                                        <a href="@Model.Anh2"> <img style="width:29%" src="@Model.Anh2" alt=""></a>
+                                        <a href="@Model.Anh2"> <img style="width:29%" src="@Model.Anh2" alt=""></a>
+                                    </div>*@
+                            </div>
+                            <!--
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                            -->
+                        </div>
+                        @*<div class="btn-toolbar">
+                                <div class="btn-group">
+                                    <span class="btn"><i class="icon-envelope"></i></span>
+                                    <span class="btn"><i class="icon-print"></i></span>
+                                    <span class="btn"><i class="icon-zoom-in"></i></span>
+                                    <span class="btn"><i class="icon-star"></i></span>
+                                    <span class="btn"><i class=" icon-thumbs-up"></i></span>
+                                    <span class="btn"><i class="icon-thumbs-down"></i></span>
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="span6">
+                        <h3>@Model.TenSP</h3>
+                        <hr class="soft">
+                        <div class="control-group">
+                            <p><strong>Mô tả:</strong></p>
+                            <p>@Html.Raw(Model.MoTa1)</p>
+                        </div>
+                        <hr class="soft">
+                        <form class="form-horizontal qtyFrm">
+                            <div class="control-group">
+                                <p class="Gia">Giá cũ:@string.Format("{0:0,0}", Model.Gia) VNĐ</p>
+                                <p class="GiamGia">Giảm còn:@string.Format("{0:0,0}", Model.GiamGia) VNĐ</p>
+                                <p>Số lượng còn lại: @Model.SoLuong</p>
+                            </div>
+                        </form>
+
+                        <hr class="soft">
+                        @using (Html.BeginForm("ThemItemGioHang", "GioHang", new { @MaSP = Model.MaSP, @strUrl = Request.Url.ToString() }))
+                        {
+                            <div class="control-group">
+                                <p>Số lượng: <input type="number" name="txtSoLuong" class="span1" placeholder="1"></p>
+                            </div>
+                            <hr />
+                            <p>
+                                <button type="submit" class="btn btn-large btn-primary pull-left"> Thêm vào giỏ hàng <i class=" icon-shopping-cart"></i></button>
+                            </p>
+                        }
+                        <hr class="soft clr">
+                        <a class="btn btn-small pull-right" href="#detail">Xem chi tiết</a>
+                        <br class="clr">
+                        <a href="#" name="detail"></a>
+                        <hr class="soft">
+                    </div>
+
+                    <div class="span9">
+                        <ul id="productDetail" class="nav nav-tabs">
+                            <li class="active"><a href="#home" data-toggle="tab">Chi tiết sản phẩm</a></li>
+                            <li><a href="#profile" data-toggle="tab">Sản phẩm liên quan</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade active in" id="home">
+                                <h4>Thông tin chi tiết</h4>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="techSpecRow"><th colspan="2">Chi tiết sản phẩm</th></tr>
+                                        <tr class="techSpecRow"><td class="techSpecTD1">Loại sản phẩm:</td><td class="techSpecTD2">@ViewBag.LoaiSP</td></tr>
+                                        <tr class="techSpecRow"><td class="techSpecTD1">Thương hiệu: </td><td class="techSpecTD2">@ViewBag.ThuongHieu</td></tr>
+                                        <tr class="techSpecRow"><td class="techSpecTD1">Xuất xứ:</td><td class="techSpecTD2">@ViewBag.XuatXu</td></tr>
+                                    </tbody>
+                                </table>
+
+                                <h4>Mô tả sản phẩm</h4>
+                                <h4>@Model.MoTa2</h4>
+                                <p>
+                                    @Model.MoTa3
+                                </p>
+
+                                <h4>@Model.MoTa4</h4>
+                                <p>
+                                    @Model.MoTa5
+                                </p>
+                            </div>
+                            @Html.Action("SanPhamLienQuanPartial", "SanPham", new { @MaSP = Model.MaSP })
+
+                            @*<div class="tab-pane fade" id="profile">
+                                    <br class="clr">
+                                    <hr class="soft">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="blockView">
+                                            <ul class="thumbnails">
+                                                <li class="span3">
+                                                    <div class="thumbnail">
+                                                        <a href="product_details.html"><img src="themes/images/products/10.jpg" alt=""></a>
+                                                        <div class="caption">
+                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text.
+                                                            </p>
+                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="span3">
+                                                    <div class="thumbnail">
+                                                        <a href="product_details.html"><img src="themes/images/products/11.jpg" alt=""></a>
+                                                        <div class="caption">
+                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text.
+                                                            </p>
+                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="span3">
+                                                    <div class="thumbnail">
+                                                        <a href="product_details.html"><img src="themes/images/products/12.jpg" alt=""></a>
+                                                        <div class="caption">
+                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text.
+                                                            </p>
+                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="span3">
+                                                    <div class="thumbnail">
+                                                        <a href="product_details.html"><img src="themes/images/products/13.jpg" alt=""></a>
+                                                        <div class="caption">
+                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text.
+                                                            </p>
+                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="span3">
+                                                    <div class="thumbnail">
+                                                        <a href="product_details.html"><img src="themes/images/products/1.jpg" alt=""></a>
+                                                        <div class="caption">
+                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text.
+                                                            </p>
+                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="span3">
+                                                    <div class="thumbnail">
+                                                        <a href="product_details.html"><img src="themes/images/products/2.jpg" alt=""></a>
+                                                        <div class="caption">
+                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text.
+                                                            </p>
+                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <hr class="soft">
+                                        </div>
+                                    </div>
+                                    <br class="clr">
+                                </div>*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,15 @@
+﻿@using ShopBanChuot.Models;
+@model List<XUATXU>
+
+<a> XUẤT XỨ</a>
+<ul>
+    @{
+        foreach (var item in Model)
+        {
+            <li><a href=@Url.Action("SanPhamTheoXuatXu", "SanPham", new { @MaXX = item.MaXX })><i class="icon-chevron-right"></i>@item.TenXX</a></li>
+        }
+    }
+</ul>
+
+
+

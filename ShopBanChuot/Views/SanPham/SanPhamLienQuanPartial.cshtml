@@ -1,0 +1,50 @@
+﻿@using ShopBanChuot.Models
+@model List<SANPHAM>
+
+<div class="tab-pane fade" id="profile">
+    <br class="clr">
+    <hr class="soft">
+    <div class="tab-content">
+        <div class="tab-pane active" id="blockView">
+            <ul class="thumbnails">
+                @foreach (var item in Model)
+                {
+                    <li class="span3">
+                        <div class="thumbnail" style="height: 405px;">
+                            <a href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = item.MaSP })><img src="@item.Anh1" width="150" height="150" alt="không có ảnh " /></a>
+                            <div class="caption" style="height: 130px;">
+                                @{
+                                    if (item.TenSP.Length > 35)
+                                    {
+                                        <h5>@item.TenSP.Substring(0, 35)... </h5>
+                                    }
+                                    else
+                                    {
+                                        <h5>@item.TenSP </h5>
+                                    }
+                                     <p class="Gia">Giá cũ:@string.Format("{0:0,0}", @item.Gia) VNĐ</p>
+                                    <p class="GiamGia">Giảm còn:@string.Format("{0:0,0}", @item.GiamGia) VNĐ</p>
+                                }
+                            </div>
+
+                            <div class="align-center">
+                                <h4 style="text-align:center">
+                                    <a class="btn btn-success" style="width:160px;" href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = item.MaSP })>Xem thông tin chi tiết</a>
+                                </h4>
+                                <h4 style="text-align:center">
+                                    <a class="btn btn-primary " style="width:160px;" href=@Url.Action("ThemItemGioHang", "GioHang", new { @MaSP = item.MaSP, @strUrl = Request.Url})>Thêm vào giỏ hàng<i class="icon-shopping-cart"></i></a>
+                                </h4>
+
+                            </div>
+                        </div>
+
+                    </li>
+                }
+
+            </ul>
+            <hr class="soft">
+        </div>
+    </div>
+    <br class="clr">
+</div>
+
