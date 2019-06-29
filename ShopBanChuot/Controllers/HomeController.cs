@@ -13,6 +13,7 @@ namespace ShopBanChuot.Controllers
         // GET: /Home/
         ShopBanChuotEntities db = new ShopBanChuotEntities();
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Index()
         {

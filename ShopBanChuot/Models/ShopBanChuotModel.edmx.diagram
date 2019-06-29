@@ -4,25 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d617d7c3241540ed8f2b8045e1aec058" Name="Diagram1">
-        <EntityTypeShape EntityType="ShopBanChuot.CHITIETDONHANG" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.DONHANG" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.LOAISANPHAM" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.MENU" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.SANPHAM" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.sysdiagram" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.TAIKHOAN" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.THUONGHIEU" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.XUATXU" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopBanChuot.LIENHE" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="ShopBanChuot.FK_CHITIETDONHANG_DONHANG" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBanChuot.FK_CHITIETDONHANG_SANPHAM" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBanChuot.FK_DONHANG_TAIKHOAN" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBanChuot.FK_SANPHAM_LOAISANPHAM" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBanChuot.FK_SANPHAM_THUONGHIEU" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopBanChuot.FK_SANPHAM_XUATXU" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ShopBanChuot.VAITRO" Width="1.5" PointX="0.75" PointY="14.125" />
-        <AssociationConnector Association="ShopBanChuot.FK_TAIKHOAN_VAITRO" />
+      <Diagram DiagramId="d24dd7847de84879a194e7c6ed0a32dd" Name="Diagram1">
+        <EntityTypeShape EntityType="ShopBanChuotModel.CHITIETDONHANG" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.DONHANG" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.LOAISANPHAM" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.MENU" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.NHOMTAIKHOAN" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.QUYEN" Width="1.5" PointX="3.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.SANPHAM" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.TAIKHOAN" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.THUONGHIEU" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.XUATXU" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopBanChuotModel.LIENHE" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="ShopBanChuotModel.FK_CHITIETDONHANG_DONHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBanChuotModel.FK_CHITIETDONHANG_SANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBanChuotModel.FK_DONHANG_TAIKHOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBanChuotModel.FK_SANPHAM_LOAISANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBanChuotModel.FK_TAIKHOAN_NHOMTAIKHOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBanChuotModel.FK_SANPHAM_THUONGHIEU" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBanChuotModel.FK_SANPHAM_XUATXU" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopBanChuotModel.PHANQUYEN" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

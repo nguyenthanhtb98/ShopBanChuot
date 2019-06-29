@@ -12,6 +12,7 @@ using PagedList.Mvc;
 using System.IO;
 namespace ShopBanChuot.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class QLSPController : Controller
     {
 

@@ -41,10 +41,19 @@
             <div id="welcomeLine" class="row">
                <div class="pull-right"><span style="font-size:large; color:blue">                 
                     @{
-                        if (Session["TenTaiKhoan"] != null)
+                        if (User.Identity.IsAuthenticated) //hoặc Session["TenTaiKhoan"] != null
                         {
-                            <span>Xin chào </span><strong>@Session["TenTaiKhoan"].ToString()</strong>
+                            if (User.IsInRole("Admin"))
+                            {
+                                <a href=@Url.Action("Index","Home",new { area = "Admin"}) style="color:red">Vào trang quản lý</a>
+                                <span>Xin chào @User.Identity.Name</span> // test thử cái user
+                            }
+                            else
+                            {
+                                <span>Xin chào </span><strong>@Session["TenTaiKhoan"].ToString()</strong>
+                            }
                         }
+
                     }
                     </span>
                </div>

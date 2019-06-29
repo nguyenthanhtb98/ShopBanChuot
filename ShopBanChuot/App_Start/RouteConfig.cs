@@ -16,7 +16,8 @@ namespace ShopBanChuot
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "ShopBanChuot.Controllers" } // dòng này tránh cho việc 2 controller có cùng tên, 1 ở area admin, 1 ở ngoài
             );
         }
     }

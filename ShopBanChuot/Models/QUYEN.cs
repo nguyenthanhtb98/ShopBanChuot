@@ -12,25 +12,18 @@ namespace ShopBanChuot.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TAIKHOAN
+    public partial class QUYEN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TAIKHOAN()
+        public QUYEN()
         {
-            this.DONHANGs = new HashSet<DONHANG>();
+            this.NHOMTAIKHOANs = new HashSet<NHOMTAIKHOAN>();
         }
     
-        public string TenTaiKhoan { get; set; }
-        public string MatKhau { get; set; }
-        public string TenKhachHang { get; set; }
-        public string GioiTinh { get; set; }
-        public string SDT { get; set; }
-        public string Email { get; set; }
-        public string DiaChi { get; set; }
-        public Nullable<int> MaNhomTK { get; set; }
+        public int MaQuyen { get; set; }
+        public string TenQuyen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DONHANG> DONHANGs { get; set; }
-        public virtual NHOMTAIKHOAN NHOMTAIKHOAN { get; set; }
+        public virtual ICollection<NHOMTAIKHOAN> NHOMTAIKHOANs { get; set; }
     }
 }

@@ -21,11 +21,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href=@Url.Action("Index","QLSP")><span>Trang quản lý</span></a>
+                <a class="brand" href=@Url.Action("Index","Home")><span>Trang quản lý</span></a>
 
                 <!-- start: Header Menu -->
                 <div class="nav-no-collapse header-nav">
                     <ul class="nav pull-right">
+                        <li><a class="brand" href= @Url.Action("Index","Home",new { area = ""}) >Quay về trang chủ</a></li>
                         <!-- start: User Dropdown -->
                         <li class="dropdown">
                             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ShopBanChuot.Models;
+using System.Web.Security;
 
 namespace ShopBanChuot.Controllers
 {
@@ -58,8 +59,9 @@ namespace ShopBanChuot.Controllers
             TAIKHOAN TK = db.TAIKHOANs.SingleOrDefault(n => n.TenTaiKhoan == strTenTaiKhoan && n.MatKhau == strMatKhau);
             if(TK!=null)
             {
+                FormsAuthentication.SetAuthCookie(TK.TenTaiKhoan, false);
                 Session["TaiKhoan"] = TK;
-                Session["TenTaiKhoan"] = TK.TenTaiKhoan;
+                Session["TenTaiKhoan"] = TK.TenTaiKhoan;                
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -71,6 +73,7 @@ namespace ShopBanChuot.Controllers
 
         public ActionResult DangXuat()
         {
+            FormsAuthentication.SignOut();
             Session["TaiKhoan"] = null;
             Session["TenTaiKhoan"] = null;
             return RedirectToAction("Index", "Home");

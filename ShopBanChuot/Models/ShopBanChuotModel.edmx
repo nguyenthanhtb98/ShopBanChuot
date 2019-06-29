@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ShopBanChuot.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ShopBanChuotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CHITIETDONHANG">
           <Key>
             <PropertyRef Name="MaCTDH" />
@@ -20,7 +20,7 @@
             <PropertyRef Name="MaDH" />
           </Key>
           <Property Name="MaDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenTaiKhoan" Type="char" MaxLength="50" />
+          <Property Name="TenTaiKhoan" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayDatHang" Type="date" />
           <Property Name="NgayGiaoHang" Type="date" />
           <Property Name="TrangThai" Type="int" />
@@ -35,7 +35,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
           <Property Name="SDT" Type="char" MaxLength="20" />
           <Property Name="Email" Type="char" MaxLength="50" />
-          <Property Name="NoiDungChiTiet" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoiDungChiTiet" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="LOAISANPHAM">
           <Key>
@@ -52,6 +52,28 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           <Property Name="TenMenu" Type="nvarchar" MaxLength="50" />
           <Property Name="Link" Type="char" MaxLength="50" />
           <Property Name="MaMenuCha" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="NHOMTAIKHOAN">
+          <Key>
+            <PropertyRef Name="MaNhomTK" />
+          </Key>
+          <Property Name="MaNhomTK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNhomTK" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PHANQUYEN">
+          <Key>
+            <PropertyRef Name="MaNhomTK" />
+            <PropertyRef Name="MaQuyen" />
+          </Key>
+          <Property Name="MaNhomTK" Type="int" Nullable="false" />
+          <Property Name="MaQuyen" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QUYEN">
+          <Key>
+            <PropertyRef Name="MaQuyen" />
+          </Key>
+          <Property Name="MaQuyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenQuyen" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="SANPHAM">
           <Key>
@@ -90,14 +112,14 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           <Key>
             <PropertyRef Name="TenTaiKhoan" />
           </Key>
-          <Property Name="TenTaiKhoan" Type="char" MaxLength="50" Nullable="false" />
-          <Property Name="MatKhau" Type="char" MaxLength="50" />
+          <Property Name="TenTaiKhoan" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
           <Property Name="TenKhachHang" Type="nvarchar" MaxLength="50" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
           <Property Name="SDT" Type="char" MaxLength="20" />
           <Property Name="Email" Type="char" MaxLength="50" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
-          <Property Name="MaVaiTro" Type="int" />
+          <Property Name="MaNhomTK" Type="int" />
         </EntityType>
         <EntityType Name="THUONGHIEU">
           <Key>
@@ -105,13 +127,6 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           </Key>
           <Property Name="MaTH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenTH" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="VAITRO">
-          <Key>
-            <PropertyRef Name="MaVaiTro" />
-          </Key>
-          <Property Name="MaVaiTro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenVaiTro" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="XUATXU">
           <Key>
@@ -156,6 +171,30 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PHANQUYEN_NHOMTAIKHOAN(MaNhomTK)">
+          <End Role="NHOMTAIKHOAN" Type="Self.NHOMTAIKHOAN" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMTAIKHOAN">
+              <PropertyRef Name="MaNhomTK" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaNhomTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHANQUYEN_QUYEN(MaQuyen)">
+          <End Role="QUYEN" Type="Self.QUYEN" Multiplicity="1" />
+          <End Role="PHANQUYEN" Type="Self.PHANQUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUYEN">
+              <PropertyRef Name="MaQuyen" />
+            </Principal>
+            <Dependent Role="PHANQUYEN">
+              <PropertyRef Name="MaQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SANPHAM_LOAISANPHAM">
           <End Role="LOAISANPHAM" Type="Self.LOAISANPHAM" Multiplicity="0..1" />
           <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
@@ -192,15 +231,15 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TAIKHOAN_VAITRO">
-          <End Role="VAITRO" Type="Self.VAITRO" Multiplicity="0..1" />
+        <Association Name="FK_TAIKHOAN_NHOMTAIKHOAN">
+          <End Role="NHOMTAIKHOAN" Type="Self.NHOMTAIKHOAN" Multiplicity="0..1" />
           <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="VAITRO">
-              <PropertyRef Name="MaVaiTro" />
+            <Principal Role="NHOMTAIKHOAN">
+              <PropertyRef Name="MaNhomTK" />
             </Principal>
             <Dependent Role="TAIKHOAN">
-              <PropertyRef Name="MaVaiTro" />
+              <PropertyRef Name="MaNhomTK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -258,16 +297,18 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           <Parameter Name="SDT" Type="char" Mode="In" />
           <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
         </Function>
-        <EntityContainer Name="ShopBanChuotStoreContainer">
+        <EntityContainer Name="ShopBanChuotModelStoreContainer">
           <EntitySet Name="CHITIETDONHANG" EntityType="Self.CHITIETDONHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DONHANG" EntityType="Self.DONHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAISANPHAM" EntityType="Self.LOAISANPHAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MENU" EntityType="Self.MENU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHOMTAIKHOAN" EntityType="Self.NHOMTAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHANQUYEN" EntityType="Self.PHANQUYEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUYEN" EntityType="Self.QUYEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THUONGHIEU" EntityType="Self.THUONGHIEU" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="VAITRO" EntityType="Self.VAITRO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XUATXU" EntityType="Self.XUATXU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LIENHE" EntityType="Self.LIENHE" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -290,6 +331,14 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
             <End Role="DONHANG" EntitySet="DONHANG" />
           </AssociationSet>
+          <AssociationSet Name="FK_PHANQUYEN_NHOMTAIKHOAN(MaNhomTK)" Association="Self.FK_PHANQUYEN_NHOMTAIKHOAN(MaNhomTK)">
+            <End Role="NHOMTAIKHOAN" EntitySet="NHOMTAIKHOAN" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHANQUYEN_QUYEN(MaQuyen)" Association="Self.FK_PHANQUYEN_QUYEN(MaQuyen)">
+            <End Role="QUYEN" EntitySet="QUYEN" />
+            <End Role="PHANQUYEN" EntitySet="PHANQUYEN" />
+          </AssociationSet>
           <AssociationSet Name="FK_SANPHAM_LOAISANPHAM" Association="Self.FK_SANPHAM_LOAISANPHAM">
             <End Role="LOAISANPHAM" EntitySet="LOAISANPHAM" />
             <End Role="SANPHAM" EntitySet="SANPHAM" />
@@ -302,15 +351,16 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             <End Role="XUATXU" EntitySet="XUATXU" />
             <End Role="SANPHAM" EntitySet="SANPHAM" />
           </AssociationSet>
-          <AssociationSet Name="FK_TAIKHOAN_VAITRO" Association="Self.FK_TAIKHOAN_VAITRO">
-            <End Role="VAITRO" EntitySet="VAITRO" />
+          <AssociationSet Name="FK_TAIKHOAN_NHOMTAIKHOAN" Association="Self.FK_TAIKHOAN_NHOMTAIKHOAN">
+            <End Role="NHOMTAIKHOAN" EntitySet="NHOMTAIKHOAN" />
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ShopBanChuot" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ShopBanChuotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="CHITIETDONHANG">
           <Key>
             <PropertyRef Name="MaCTDH" />
@@ -328,7 +378,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             <PropertyRef Name="MaDH" />
           </Key>
           <Property Name="MaDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenTaiKhoan" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="TenTaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgayDatHang" Type="DateTime" Precision="0" />
           <Property Name="NgayGiaoHang" Type="DateTime" Precision="0" />
           <Property Name="TrangThai" Type="Int32" />
@@ -351,6 +401,23 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           <Property Name="TenMenu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Link" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
           <Property Name="MaMenuCha" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="NHOMTAIKHOAN">
+          <Key>
+            <PropertyRef Name="MaNhomTK" />
+          </Key>
+          <Property Name="MaNhomTK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNhomTK" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TAIKHOANs" Relationship="Self.FK_TAIKHOAN_NHOMTAIKHOAN" FromRole="NHOMTAIKHOAN" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="QUYENs" Relationship="Self.PHANQUYEN" FromRole="NHOMTAIKHOAN" ToRole="QUYEN" />
+        </EntityType>
+        <EntityType Name="QUYEN">
+          <Key>
+            <PropertyRef Name="MaQuyen" />
+          </Key>
+          <Property Name="MaQuyen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenQuyen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NHOMTAIKHOANs" Relationship="Self.PHANQUYEN" FromRole="QUYEN" ToRole="NHOMTAIKHOAN" />
         </EntityType>
         <EntityType Name="SANPHAM">
           <Key>
@@ -393,16 +460,16 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           <Key>
             <PropertyRef Name="TenTaiKhoan" />
           </Key>
-          <Property Name="TenTaiKhoan" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="TenTaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TenKhachHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaNhomTK" Type="Int32" />
           <NavigationProperty Name="DONHANGs" Relationship="Self.FK_DONHANG_TAIKHOAN" FromRole="TAIKHOAN" ToRole="DONHANG" />
-          <Property Name="MaVaiTro" Type="Int32" />
-          <NavigationProperty Name="VAITRO" Relationship="ShopBanChuot.FK_TAIKHOAN_VAITRO" FromRole="TAIKHOAN" ToRole="VAITRO" />
+          <NavigationProperty Name="NHOMTAIKHOAN" Relationship="Self.FK_TAIKHOAN_NHOMTAIKHOAN" FromRole="TAIKHOAN" ToRole="NHOMTAIKHOAN" />
         </EntityType>
         <EntityType Name="THUONGHIEU">
           <Key>
@@ -428,7 +495,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
-          <Property Name="NoiDungChiTiet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDungChiTiet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CHITIETDONHANG_DONHANG">
           <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="0..1" />
@@ -478,6 +545,18 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TAIKHOAN_NHOMTAIKHOAN">
+          <End Role="NHOMTAIKHOAN" Type="Self.NHOMTAIKHOAN" Multiplicity="0..1" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMTAIKHOAN">
+              <PropertyRef Name="MaNhomTK" />
+            </Principal>
+            <Dependent Role="TAIKHOAN">
+              <PropertyRef Name="MaNhomTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SANPHAM_THUONGHIEU">
           <End Role="THUONGHIEU" Type="Self.THUONGHIEU" Multiplicity="0..1" />
           <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
@@ -502,11 +581,17 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PHANQUYEN">
+          <End Role="NHOMTAIKHOAN" Type="Self.NHOMTAIKHOAN" Multiplicity="*" />
+          <End Role="QUYEN" Type="Self.QUYEN" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="ShopBanChuotEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CHITIETDONHANGs" EntityType="Self.CHITIETDONHANG" />
           <EntitySet Name="DONHANGs" EntityType="Self.DONHANG" />
           <EntitySet Name="LOAISANPHAMs" EntityType="Self.LOAISANPHAM" />
           <EntitySet Name="MENUs" EntityType="Self.MENU" />
+          <EntitySet Name="NHOMTAIKHOANs" EntityType="Self.NHOMTAIKHOAN" />
+          <EntitySet Name="QUYENs" EntityType="Self.QUYEN" />
           <EntitySet Name="SANPHAMs" EntityType="Self.SANPHAM" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOAN" />
@@ -529,6 +614,10 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             <End Role="LOAISANPHAM" EntitySet="LOAISANPHAMs" />
             <End Role="SANPHAM" EntitySet="SANPHAMs" />
           </AssociationSet>
+          <AssociationSet Name="FK_TAIKHOAN_NHOMTAIKHOAN" Association="Self.FK_TAIKHOAN_NHOMTAIKHOAN">
+            <End Role="NHOMTAIKHOAN" EntitySet="NHOMTAIKHOANs" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+          </AssociationSet>
           <AssociationSet Name="FK_SANPHAM_THUONGHIEU" Association="Self.FK_SANPHAM_THUONGHIEU">
             <End Role="THUONGHIEU" EntitySet="THUONGHIEUx" />
             <End Role="SANPHAM" EntitySet="SANPHAMs" />
@@ -537,19 +626,23 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             <End Role="XUATXU" EntitySet="XUATXUs" />
             <End Role="SANPHAM" EntitySet="SANPHAMs" />
           </AssociationSet>
+          <AssociationSet Name="PHANQUYEN" Association="Self.PHANQUYEN">
+            <End Role="NHOMTAIKHOAN" EntitySet="NHOMTAIKHOANs" />
+            <End Role="QUYEN" EntitySet="QUYENs" />
+          </AssociationSet>
           <FunctionImport Name="DangNhap" ReturnType="Collection(Boolean)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="LayDanhSachSanPham" ReturnType="Collection(ShopBanChuot.LayDanhSachSanPham_Result)" />
-          <FunctionImport Name="LayDanhSachSanPhamTheoLoaiSanPham" ReturnType="Collection(ShopBanChuot.LayDanhSachSanPhamTheoLoaiSanPham_Result)">
-          <Parameter Name="malsp" Mode="In" Type="String" />
+          <FunctionImport Name="LayDanhSachSanPham" ReturnType="Collection(ShopBanChuotModel.LayDanhSachSanPham_Result)" />
+          <FunctionImport Name="LayDanhSachSanPhamTheoLoaiSanPham" ReturnType="Collection(ShopBanChuotModel.LayDanhSachSanPhamTheoLoaiSanPham_Result)">
+            <Parameter Name="malsp" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="LayDanhSachSanPhamTheoThuongHieu" ReturnType="Collection(ShopBanChuot.LayDanhSachSanPhamTheoThuongHieu_Result)">
-          <Parameter Name="math" Mode="In" Type="String" />
+          <FunctionImport Name="LayDanhSachSanPhamTheoThuongHieu" ReturnType="Collection(ShopBanChuotModel.LayDanhSachSanPhamTheoThuongHieu_Result)">
+            <Parameter Name="math" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="LayDanhSachSanPhamTheoXuatXu" ReturnType="Collection(ShopBanChuot.LayDanhSachSanPhamTheoXuatXu_Result)">
-          <Parameter Name="maxx" Mode="In" Type="String" />
+          <FunctionImport Name="LayDanhSachSanPhamTheoXuatXu" ReturnType="Collection(ShopBanChuotModel.LayDanhSachSanPhamTheoXuatXu_Result)">
+            <Parameter Name="maxx" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -567,11 +660,11 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ShopBanChuot.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ShopBanChuotModel.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ShopBanChuot.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ShopBanChuotModel.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -590,11 +683,6 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             <Parameter Name="SDT" Mode="In" Type="String" />
             <Parameter Name="DiaChi" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="VAITROes" EntityType="ShopBanChuot.VAITRO" />
-          <AssociationSet Name="FK_TAIKHOAN_VAITRO" Association="ShopBanChuot.FK_TAIKHOAN_VAITRO">
-            <End Role="VAITRO" EntitySet="VAITROes" />
-            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
-          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="LayDanhSachSanPham_Result">
           <Property Type="Int32" Name="MaSP" Nullable="false" />
@@ -687,34 +775,14 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="VAITRO">
-          <Key>
-            <PropertyRef Name="MaVaiTro" />
-          </Key>
-          <Property Name="MaVaiTro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenVaiTro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TAIKHOANs" Relationship="ShopBanChuot.FK_TAIKHOAN_VAITRO" FromRole="VAITRO" ToRole="TAIKHOAN" />
-        </EntityType>
-        <Association Name="FK_TAIKHOAN_VAITRO">
-          <End Type="ShopBanChuot.VAITRO" Role="VAITRO" Multiplicity="0..1" />
-          <End Type="ShopBanChuot.TAIKHOAN" Role="TAIKHOAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VAITRO">
-              <PropertyRef Name="MaVaiTro" />
-            </Principal>
-            <Dependent Role="TAIKHOAN">
-              <PropertyRef Name="MaVaiTro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ShopBanChuotStoreContainer" CdmEntityContainer="ShopBanChuotEntities">
+        <EntityContainerMapping StorageEntityContainer="ShopBanChuotModelStoreContainer" CdmEntityContainer="ShopBanChuotEntities">
           <EntitySetMapping Name="CHITIETDONHANGs">
-            <EntityTypeMapping TypeName="ShopBanChuot.CHITIETDONHANG">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.CHITIETDONHANG">
               <MappingFragment StoreEntitySet="CHITIETDONHANG">
                 <ScalarProperty Name="MaCTDH" ColumnName="MaCTDH" />
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
@@ -725,7 +793,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DONHANGs">
-            <EntityTypeMapping TypeName="ShopBanChuot.DONHANG">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.DONHANG">
               <MappingFragment StoreEntitySet="DONHANG">
                 <ScalarProperty Name="MaDH" ColumnName="MaDH" />
                 <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
@@ -736,7 +804,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LOAISANPHAMs">
-            <EntityTypeMapping TypeName="ShopBanChuot.LOAISANPHAM">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.LOAISANPHAM">
               <MappingFragment StoreEntitySet="LOAISANPHAM">
                 <ScalarProperty Name="MaLoaiSP" ColumnName="MaLoaiSP" />
                 <ScalarProperty Name="TenLoaiSP" ColumnName="TenLoaiSP" />
@@ -744,7 +812,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MENUs">
-            <EntityTypeMapping TypeName="ShopBanChuot.MENU">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.MENU">
               <MappingFragment StoreEntitySet="MENU">
                 <ScalarProperty Name="MaMenu" ColumnName="MaMenu" />
                 <ScalarProperty Name="TenMenu" ColumnName="TenMenu" />
@@ -753,8 +821,24 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="NHOMTAIKHOANs">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.NHOMTAIKHOAN">
+              <MappingFragment StoreEntitySet="NHOMTAIKHOAN">
+                <ScalarProperty Name="MaNhomTK" ColumnName="MaNhomTK" />
+                <ScalarProperty Name="TenNhomTK" ColumnName="TenNhomTK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUYENs">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.QUYEN">
+              <MappingFragment StoreEntitySet="QUYEN">
+                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+                <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SANPHAMs">
-            <EntityTypeMapping TypeName="ShopBanChuot.SANPHAM">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.SANPHAM">
               <MappingFragment StoreEntitySet="SANPHAM">
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
@@ -778,7 +862,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ShopBanChuot.sysdiagram">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -789,9 +873,8 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TAIKHOANs">
-            <EntityTypeMapping TypeName="ShopBanChuot.TAIKHOAN">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.TAIKHOAN">
               <MappingFragment StoreEntitySet="TAIKHOAN">
-                <ScalarProperty Name="MaVaiTro" ColumnName="MaVaiTro" />
                 <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="TenKhachHang" ColumnName="TenKhachHang" />
@@ -799,11 +882,12 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
                 <ScalarProperty Name="SDT" ColumnName="SDT" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="MaNhomTK" ColumnName="MaNhomTK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="THUONGHIEUx">
-            <EntityTypeMapping TypeName="ShopBanChuot.THUONGHIEU">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.THUONGHIEU">
               <MappingFragment StoreEntitySet="THUONGHIEU">
                 <ScalarProperty Name="MaTH" ColumnName="MaTH" />
                 <ScalarProperty Name="TenTH" ColumnName="TenTH" />
@@ -811,7 +895,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="XUATXUs">
-            <EntityTypeMapping TypeName="ShopBanChuot.XUATXU">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.XUATXU">
               <MappingFragment StoreEntitySet="XUATXU">
                 <ScalarProperty Name="MaXX" ColumnName="MaXX" />
                 <ScalarProperty Name="TenXX" ColumnName="TenXX" />
@@ -819,7 +903,7 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LIENHEs">
-            <EntityTypeMapping TypeName="ShopBanChuot.LIENHE">
+            <EntityTypeMapping TypeName="ShopBanChuotModel.LIENHE">
               <MappingFragment StoreEntitySet="LIENHE">
                 <ScalarProperty Name="MaLH" ColumnName="MaLH" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
@@ -829,10 +913,18 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="DangNhap" FunctionName="ShopBanChuot.Store.DangNhap" />
-          <FunctionImportMapping FunctionImportName="LayDanhSachSanPham" FunctionName="ShopBanChuot.Store.LayDanhSachSanPham">
+          <AssociationSetMapping Name="PHANQUYEN" TypeName="ShopBanChuotModel.PHANQUYEN" StoreEntitySet="PHANQUYEN">
+            <EndProperty Name="NHOMTAIKHOAN">
+              <ScalarProperty Name="MaNhomTK" ColumnName="MaNhomTK" />
+            </EndProperty>
+            <EndProperty Name="QUYEN">
+              <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="DangNhap" FunctionName="ShopBanChuotModel.Store.DangNhap" />
+          <FunctionImportMapping FunctionImportName="LayDanhSachSanPham" FunctionName="ShopBanChuotModel.Store.LayDanhSachSanPham">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShopBanChuot.LayDanhSachSanPham_Result">
+              <ComplexTypeMapping TypeName="ShopBanChuotModel.LayDanhSachSanPham_Result">
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
@@ -854,9 +946,9 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LayDanhSachSanPhamTheoLoaiSanPham" FunctionName="ShopBanChuot.Store.LayDanhSachSanPhamTheoLoaiSanPham">
+          <FunctionImportMapping FunctionImportName="LayDanhSachSanPhamTheoLoaiSanPham" FunctionName="ShopBanChuotModel.Store.LayDanhSachSanPhamTheoLoaiSanPham">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShopBanChuot.LayDanhSachSanPhamTheoLoaiSanPham_Result">
+              <ComplexTypeMapping TypeName="ShopBanChuotModel.LayDanhSachSanPhamTheoLoaiSanPham_Result">
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
@@ -878,9 +970,9 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LayDanhSachSanPhamTheoThuongHieu" FunctionName="ShopBanChuot.Store.LayDanhSachSanPhamTheoThuongHieu">
+          <FunctionImportMapping FunctionImportName="LayDanhSachSanPhamTheoThuongHieu" FunctionName="ShopBanChuotModel.Store.LayDanhSachSanPhamTheoThuongHieu">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShopBanChuot.LayDanhSachSanPhamTheoThuongHieu_Result">
+              <ComplexTypeMapping TypeName="ShopBanChuotModel.LayDanhSachSanPhamTheoThuongHieu_Result">
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
@@ -902,9 +994,9 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LayDanhSachSanPhamTheoXuatXu" FunctionName="ShopBanChuot.Store.LayDanhSachSanPhamTheoXuatXu">
+          <FunctionImportMapping FunctionImportName="LayDanhSachSanPhamTheoXuatXu" FunctionName="ShopBanChuotModel.Store.LayDanhSachSanPhamTheoXuatXu">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShopBanChuot.LayDanhSachSanPhamTheoXuatXu_Result">
+              <ComplexTypeMapping TypeName="ShopBanChuotModel.LayDanhSachSanPhamTheoXuatXu_Result">
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
@@ -926,20 +1018,20 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ShopBanChuot.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ShopBanChuot.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ShopBanChuot.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ShopBanChuot.Store.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ShopBanChuotModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ShopBanChuotModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ShopBanChuotModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ShopBanChuotModel.Store.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShopBanChuot.sp_helpdiagramdefinition_Result">
+              <ComplexTypeMapping TypeName="ShopBanChuotModel.sp_helpdiagramdefinition_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ShopBanChuot.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ShopBanChuotModel.Store.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShopBanChuot.sp_helpdiagrams_Result">
+              <ComplexTypeMapping TypeName="ShopBanChuotModel.sp_helpdiagrams_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -948,17 +1040,9 @@ warning 6002: The table/view 'WebBanChuotMayTinh.dbo.LIENHE' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ShopBanChuot.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ShopBanChuot.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="ThemTaiKhoan" FunctionName="ShopBanChuot.Store.ThemTaiKhoan" />
-          <EntitySetMapping Name="VAITROes">
-            <EntityTypeMapping TypeName="ShopBanChuot.VAITRO">
-              <MappingFragment StoreEntitySet="VAITRO">
-                <ScalarProperty Name="TenVaiTro" ColumnName="TenVaiTro" />
-                <ScalarProperty Name="MaVaiTro" ColumnName="MaVaiTro" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ShopBanChuotModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ShopBanChuotModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="ThemTaiKhoan" FunctionName="ShopBanChuotModel.Store.ThemTaiKhoan" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

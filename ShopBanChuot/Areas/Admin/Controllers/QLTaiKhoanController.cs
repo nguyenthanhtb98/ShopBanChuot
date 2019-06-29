@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ShopBanChuot.Models;
 namespace ShopBanChuot.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class QLTaiKhoanController : Controller
     {
         private ShopBanChuotEntities db = new ShopBanChuotEntities();

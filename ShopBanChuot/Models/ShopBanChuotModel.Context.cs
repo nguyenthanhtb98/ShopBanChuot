@@ -31,13 +31,14 @@ namespace ShopBanChuot.Models
         public virtual DbSet<DONHANG> DONHANGs { get; set; }
         public virtual DbSet<LOAISANPHAM> LOAISANPHAMs { get; set; }
         public virtual DbSet<MENU> MENUs { get; set; }
+        public virtual DbSet<NHOMTAIKHOAN> NHOMTAIKHOANs { get; set; }
+        public virtual DbSet<QUYEN> QUYENs { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
         public virtual DbSet<THUONGHIEU> THUONGHIEUx { get; set; }
         public virtual DbSet<XUATXU> XUATXUs { get; set; }
         public virtual DbSet<LIENHE> LIENHEs { get; set; }
-        public virtual DbSet<VAITRO> VAITROes { get; set; }
     
         public virtual ObjectResult<Nullable<bool>> DangNhap(string username, string password)
         {

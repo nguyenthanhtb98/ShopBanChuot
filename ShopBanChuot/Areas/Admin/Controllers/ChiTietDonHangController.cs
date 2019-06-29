@@ -10,6 +10,7 @@ using ShopBanChuot.Models;
 
 namespace ShopBanChuot.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ChiTietDonHangController : Controller
     {
         private ShopBanChuotEntities db = new ShopBanChuotEntities();

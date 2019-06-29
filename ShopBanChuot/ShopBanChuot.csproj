@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +40,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -115,12 +124,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -169,6 +172,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ChiTietDonHangController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLDonHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLLoaiSPController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLSPController.cs" />
@@ -181,6 +185,8 @@
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\SlidebarController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
+    <Compile Include="CustomAuthorizeAttribute.cs" />
+    <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -219,6 +225,12 @@
     <Compile Include="Models\MetaData\TAIKHOAN.cs" />
     <Compile Include="Models\MetaData\THUONGHIEU.cs" />
     <Compile Include="Models\MetaData\XUATXU.cs" />
+    <Compile Include="Models\NHOMTAIKHOAN.cs">
+      <DependentUpon>ShopBanChuotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QUYEN.cs">
+      <DependentUpon>ShopBanChuotModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SANPHAM.cs">
       <DependentUpon>ShopBanChuotModel.tt</DependentUpon>
     </Compile>
@@ -250,9 +262,6 @@
       <DependentUpon>ShopBanChuotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\THUONGHIEU.cs">
-      <DependentUpon>ShopBanChuotModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VAITRO.cs">
       <DependentUpon>ShopBanChuotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\XUATXU.cs">
@@ -489,13 +498,6 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\ShopBanChuotModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ShopBanChuotModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ShopBanChuotModel.edmx.diagram">
-      <DependentUpon>ShopBanChuotModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\TemplateAdmin\font\fontawesome-webfont-0.eot" />
     <Content Include="Content\TemplateAdmin\font\fontawesome-webfont-62877.eot" />
     <Content Include="Content\TemplateAdmin\font\fontawesome-webfont-62877.ttf" />
@@ -546,6 +548,14 @@
     <Content Include="Areas\Admin\Views\QLSP\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QLSP\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QLSP\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <EntityDeploy Include="Models\ShopBanChuotModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ShopBanChuotModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ShopBanChuotModel.edmx.diagram">
+      <DependentUpon>ShopBanChuotModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -680,7 +690,9 @@
     <Content Include="themes\switch\theamswitcher.js" />
     <Content Include="themes\switch\themeswitch.css" />
     <Content Include="themes\united\bootstrap.min.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -770,6 +782,7 @@
     <Content Include="Views\GioHang\SuaItemGioHang.cshtml" />
     <Content Include="Views\GioHang\DonHangCuaToi.cshtml" />
     <Content Include="Views\SanPham\SanPhamLienQuanPartial.cshtml" />
+    <Content Include="Views\Shared\AuthorizeFail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

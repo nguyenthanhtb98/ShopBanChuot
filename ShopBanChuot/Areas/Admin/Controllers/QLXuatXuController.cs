@@ -10,6 +10,7 @@ using ShopBanChuot.Models;
 
 namespace ShopBanChuot.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class QLXuatXuController : Controller
     {
         ShopBanChuotEntities db = new ShopBanChuotEntities();
