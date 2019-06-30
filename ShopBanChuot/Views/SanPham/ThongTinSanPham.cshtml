@@ -59,8 +59,8 @@
                         <hr class="soft">
                         <form class="form-horizontal qtyFrm">
                             <div class="control-group">
-                                <p class="Gia">Giá cũ:@string.Format("{0:0,0}", Model.Gia) VNĐ</p>
-                                <p class="GiamGia">Giảm còn:@string.Format("{0:0,0}", Model.GiamGia) VNĐ</p>
+                                <p class="Gia">Giá cũ:@string.Format("{0:n0}", Model.Gia) VNĐ</p>
+                                <p class="GiamGia">Giảm còn:@string.Format("{0:n0}", Model.GiamGia) VNĐ</p>
                                 <p>Số lượng còn lại: @Model.SoLuong</p>
                             </div>
                         </form>
@@ -73,7 +73,7 @@
                             </div>
                             <hr />
                             <p>
-                                <button type="submit" class="btn btn-large btn-primary pull-left"> Thêm vào giỏ hàng <i class=" icon-shopping-cart"></i></button>
+                                <button type="submit" class="btn btn-large btn-primary pull-left"> Thêm vào giỏ hàng <i class="icon-shopping-cart"></i></button>
                             </p>
                         }
                         <hr class="soft clr">

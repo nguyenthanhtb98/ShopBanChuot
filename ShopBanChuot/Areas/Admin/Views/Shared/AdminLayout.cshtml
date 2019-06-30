@@ -22,30 +22,9 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href=@Url.Action("Index","Home")><span>Trang quản lý</span></a>
-
-                <!-- start: Header Menu -->
-                <div class="nav-no-collapse header-nav">
-                    <ul class="nav pull-right">
-                        <li><a class="brand" href= @Url.Action("Index","Home",new { area = ""}) >Quay về trang chủ</a></li>
-                        <!-- start: User Dropdown -->
-                        <li class="dropdown">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="halflings-icon white user"></i> USER
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-menu-title">
-                                    <span>Cài đặt tài khoản</span>
-                                </li>
-                                <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-                                <li><a href="login.html"><i class="halflings-icon off"></i> Đăng xuất</a></li>
-                            </ul>
-                        </li>
-                        <!-- end: User Dropdown -->
-                    </ul>
+                <div class ="pull-right">
+                        <a class="brand" href= @Url.Action("Index","Home",new { area = ""}) ><span>Quay về trang chủ</span></a>
                 </div>
-                <!-- end: Header Menu -->
-
             </div>
         </div>
     </div>

@@ -22,8 +22,8 @@
                                     {
                                         <h5>@item.TenSP </h5>
                                     }
-                                     <p class="Gia">Giá cũ:@string.Format("{0:0,0}", @item.Gia) VNĐ</p>
-                                    <p class="GiamGia">Giảm còn:@string.Format("{0:0,0}", @item.GiamGia) VNĐ</p>
+                                     <p class="Gia">Giá cũ:@string.Format("{0:n0}", @item.Gia) VNĐ</p>
+                                    <p class="GiamGia">Giảm còn:@string.Format("{0:n0}", @item.GiamGia) VNĐ</p>
                                 }
                             </div>
 
@@ -32,7 +32,9 @@
                                     <a class="btn btn-success" style="width:160px;" href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = item.MaSP })>Xem thông tin chi tiết</a>
                                 </h4>
                                 <h4 style="text-align:center">
-                                    <a class="btn btn-primary " style="width:160px;" href=@Url.Action("ThemItemGioHang", "GioHang", new { @MaSP = item.MaSP, @strUrl = Request.Url})>Thêm vào giỏ hàng<i class="icon-shopping-cart"></i></a>
+                                    
+                                    <a id="ThemSanPham" class="btn btn-primary " style="width:160px;" href=@Url.Action("ThemItemGioHang", "GioHang", new { @MaSP = item.MaSP, @strUrl = Request.Url})><span>Thêm vào giỏ hàng</span><i class="icon-shopping-cart"></i></a>
+
                                 </h4>
 
                             </div>

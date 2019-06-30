@@ -28,5 +28,6 @@ namespace ShopBanChuot.Controllers
         {
             return View(db.XUATXUs.ToList());
         }
+
 	}
 }

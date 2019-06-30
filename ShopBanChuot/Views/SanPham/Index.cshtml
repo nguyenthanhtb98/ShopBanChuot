@@ -18,17 +18,44 @@
                     <li><a href=@Url.Action("Index","Home")>Trang chủ</a> <span class="divider">/</span></li>
                     <li class="active">Toàn Bộ Sản phẩm</li>
                 </ul>*@
-                <h3> Danh sách sản phẩm<small class="pull-right"> @ViewBag.TongSoLuongSP sản phẩm </small></h3>
+                <h3> Danh sách sản phẩm: <large>@ViewBag.TongSoLuongSP sản phẩm </large></h3>
                 <hr class="soft" />
                 <form class="form-horizontal span6">
                     <div class="control-group">
-                        <label class="control-label alignL">Sắp xếp </label>
-                        <select id="sapxep" onchange="genderChanged(this)">
-                            <option value="GiaCaoToiThap"> Giá từ cao tới thấp</option>
-                            <option value="GiaThapToiCao"> Giá từ thấp tới cao</option>
-                            <option value="LuotXemNhieu"> Lượt xem nhiều </option>
-                        </select>
+                        
+                        @if (ViewBag.sapxep == 0)
+                        {
+                            <label class="control-label alignL">Sắp xếp </label>
+                            <select class="SapXep">
+                                <option value="GiaThapToiCao"> Giá từ thấp tới cao</option>
+                                <option value="GiaCaoToiThap"> Giá từ cao tới thấp</option>
+                                <option value="LuotXemNhieu"> Lượt xem nhiều </option>
+                            </select>
+                        }
+                        else if (ViewBag.sapxep == 1)
+                        {
+                            <label class="control-label alignL">Sắp xếp </label>
+                            <select class="SapXep">
+                                <option value="GiaCaoToiThap"> Giá từ cao tới thấp</option>
+                                <option value="GiaThapToiCao"> Giá từ thấp tới cao</option>                               
+                                <option value="LuotXemNhieu"> Lượt xem nhiều </option>
+                            </select>
+                        }
+                        else if (ViewBag.sapxep == 2)
+                        {
+                            <label class="control-label alignL">Sắp xếp </label>
+                            <select class="SapXep">
+                                <option value="LuotXemNhieu"> Lượt xem nhiều </option>
+                                <option value="GiaThapToiCao"> Giá từ thấp tới cao</option>
+                                <option value="GiaCaoToiThap"> Giá từ cao tới thấp</option>                             
+                            </select>
+                        }
+                        else
+                        {
+
+                        }
                     </div>
+
                 </form>
 
                 @*<div id="myTab" class="pull-right">
@@ -67,6 +94,7 @@
 
                     <div class="tab-pane  active" id="blockView">
                         <ul class="thumbnails">
+
                             @foreach (var item in Model )
                             {
                                 <li class="span3">
@@ -82,8 +110,8 @@
                                 {
                                     <h5>@item.TenSP </h5>
                                 }
-                                    <p class="Gia">Giá cũ:@string.Format("{0:0,0}", @item.Gia) VNĐ</p>
-                                                <p class="GiamGia">Giảm còn:@string.Format("{0:0,0}", @item.GiamGia) VNĐ</p>
+                                    <p class="Gia">Giá cũ:@string.Format("{0:n0}", @item.Gia) VNĐ</p>
+                                                <p class="GiamGia">Giảm còn:@string.Format("{0:n0}", @item.GiamGia) VNĐ</p>
                                             }
                                         </div>
 
@@ -92,7 +120,8 @@
                                                 <a class="btn btn-success" style="width:160px;" href=@Url.Action("ThongTinSanPham", "SanPham", new {@MaSP = item.MaSP })>Xem thông tin chi tiết</a>
                                             </h4>
                                             <h4 style="text-align:center">
-                                                <a class="btn btn-primary " style="width:160px;" href=@Url.Action("ThemItemGioHang", "GioHang", new { @MaSP = item.MaSP, @strUrl = Request.Url})>Thêm vào giỏ hàng<i class="icon-shopping-cart"></i></a>
+                                                <a class="btn btn-primary" style="width:160px;" href=@Url.Action("ThemItemGioHang", "GioHang", new { @MaSP = item.MaSP, @strUrl = Request.Url})><span class="ThemVaoGioHang">Thêm vào giỏ hàng</span><i class="icon-shopping-cart"></i></a>
+
                                             </h4>
 
                                         </div>
@@ -101,6 +130,7 @@
                                 </li>
                             }
                         </ul>
+
                         <hr class="soft" />
                     </div>
                 </div>
@@ -110,7 +140,7 @@
                 <div class="pagination">
                     <p>Trang:</p>
                     <ul>
-                        @Html.PagedListPager(Model, page => @Url.Action("Index", new { page = page}))
+                        @Html.PagedListPager(Model, page => @Url.Action("Index", new { sapxep = ViewBag.sapxep,page = page}))
                     </ul>
                 </div>
                 <br class="clr" />

@@ -15,6 +15,14 @@
         <li class="subMenu open">
             @Html.Action("XuatXuPartial", "Slidebar")
         </li>
+        <li class="subMenu open">
+            <a> KHOẢNG GIÁ </a>
+            <ul>
+                <li class=""><a href=@Url.Action("KhoangGia","SanPham",new { KhoangGia = "0"})><i class="icon-chevron-right"></i>Dưới 200k</a></li>
+                <li><a href=@Url.Action("KhoangGia","SanPham",new { KhoangGia = "1"})><i class="icon-chevron-right"></i>Từ 200k - 500k</a></li>
+                <li><a href=@Url.Action("KhoangGia","SanPham",new { KhoangGia = "2"})><i class="icon-chevron-right"></i>Trên 500k</a></li>
+            </ul>
+        </li>
 
     </ul>
     @*<br />

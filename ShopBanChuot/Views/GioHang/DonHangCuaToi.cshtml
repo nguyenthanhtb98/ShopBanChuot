@@ -34,16 +34,16 @@
                             <tr>
                                 <td> <img width="60" src="@item.AnhSP" alt=""></td>
                                 <td>@item.TenSP</td>
-                                <td>@string.Format("{0:0,0}", @item.DonGia) VNĐ</td>
+                                <td>@string.Format("{0:n0}", @item.DonGia) VNĐ</td>
                                 <td>
                                     @item.SoLuong
                                 </td>
-                                <td>@string.Format("{0:0,0}", @item.ThanhTien) VNĐ</td>
+                                <td>@string.Format("{0:n0}", @item.ThanhTien) VNĐ</td>
                             </tr>
                         }
                         <tr>
                             <td colspan="4" style="text-align:right"><strong>Tổng cộng = </strong></td>
-                            <td class="label label-important" style="display:block"> <strong>@string.Format("{0:0,0}", @ViewBag.TongTien) VNĐ</strong></td>
+                            <td class="label label-important" style="display:block"> <strong>@string.Format("{0:n0}", @ViewBag.TongTien) VNĐ</strong></td>
                         </tr>
                     </tbody>
                 </table>
