@@ -12,6 +12,7 @@ namespace ShopBanChuot.Models
         [MetadataTypeAttribute(typeof(DONHANGMetaData))]
         internal sealed class DONHANGMetaData
         {
+            [DisplayName("Mã đơn hàng")]
             public int MaDH { get; set; }
             [DisplayName("Tên tài khoản")]
             [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này")]

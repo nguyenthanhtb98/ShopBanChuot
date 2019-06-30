@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
 }
 
 <h2>Chi tiết sản phẩm</h2>
 
 <div>
-    <h4>SANPHAM</h4>
+    <h4>SẢN PHẨM</h4>
 	<hr />
     <dl class="dl-horizontal">
         <dt>
@@ -68,11 +68,11 @@
         </dd>
 
         <dt>
-            @Html.Raw(Model.MoTa1);
+            @Html.DisplayNameFor(model => model.MoTa1)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MoTa1)
+            @Html.Raw(Model.MoTa1);
         </dd>
 
         <dt>

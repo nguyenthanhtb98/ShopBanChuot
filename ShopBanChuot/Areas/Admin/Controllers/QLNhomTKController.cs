@@ -7,117 +7,112 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShopBanChuot.Models;
+
 namespace ShopBanChuot.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class QLTaiKhoanController : Controller
+    public class QLNhomTKController : Controller
     {
         private ShopBanChuotEntities db = new ShopBanChuotEntities();
 
-        // GET: /Admin/QLTaiKhoan/
-        [AllowAnonymous]
+        // GET: Admin/QLNhomTK
         public ActionResult Index()
         {
-            return View(db.TAIKHOANs.ToList());
+            return View(db.NHOMTAIKHOANs.ToList());
         }
 
-        // GET: /Admin/QLTaiKhoan/Details/5
-        public ActionResult Details(string id)
+        // GET: Admin/QLNhomTK/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TAIKHOAN taikhoan = db.TAIKHOANs.Find(id);
-            if (taikhoan == null)
+            NHOMTAIKHOAN nHOMTAIKHOAN = db.NHOMTAIKHOANs.Find(id);
+            if (nHOMTAIKHOAN == null)
             {
                 return HttpNotFound();
             }
-            return View(taikhoan);
+            return View(nHOMTAIKHOAN);
         }
 
-        // GET: /Admin/QLTaiKhoan/Create
+        // GET: Admin/QLNhomTK/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: /Admin/QLTaiKhoan/Create
+        // POST: Admin/QLNhomTK/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="TenTaiKhoan,MatKhau,TenKhachHang,GioiTinh,SDT,Email,DiaChi")] TAIKHOAN taikhoan)
+        public ActionResult Create([Bind(Include = "MaNhomTK,TenNhomTK")] NHOMTAIKHOAN nHOMTAIKHOAN)
         {
-            TAIKHOAN TK = db.TAIKHOANs.Find(taikhoan.TenTaiKhoan);
-            if(TK!= null)
-            {
-                ViewBag.ThongBaoTenTK = "Tên tài khoản đã tồn tại";
-                return View();
-            }
             if (ModelState.IsValid)
             {
-                db.TAIKHOANs.Add(taikhoan);
+                db.NHOMTAIKHOANs.Add(nHOMTAIKHOAN);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(taikhoan);
+            return View(nHOMTAIKHOAN);
         }
 
-        // GET: /Admin/QLTaiKhoan/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Admin/QLNhomTK/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TAIKHOAN taikhoan = db.TAIKHOANs.Find(id);
-            if (taikhoan == null)
+            NHOMTAIKHOAN nHOMTAIKHOAN = db.NHOMTAIKHOANs.Find(id);
+            if (nHOMTAIKHOAN == null)
             {
                 return HttpNotFound();
             }
-            return View(taikhoan);
+            return View(nHOMTAIKHOAN);
         }
 
-        // POST: /Admin/QLTaiKhoan/Edit/5
+        // POST: Admin/QLNhomTK/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="TenTaiKhoan,MatKhau,TenKhachHang,GioiTinh,SDT,Email,DiaChi")] TAIKHOAN taikhoan)
+        public ActionResult Edit([Bind(Include = "MaNhomTK,TenNhomTK")] NHOMTAIKHOAN nHOMTAIKHOAN)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(taikhoan).State = EntityState.Modified;
+                db.Entry(nHOMTAIKHOAN).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(taikhoan);
+            return View(nHOMTAIKHOAN);
         }
 
-        // GET: /Admin/QLTaiKhoan/Delete/5
-        public ActionResult Delete(string id)
+        // GET: Admin/QLNhomTK/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TAIKHOAN taikhoan = db.TAIKHOANs.Find(id);
-            if (taikhoan == null)
+            NHOMTAIKHOAN nHOMTAIKHOAN = db.NHOMTAIKHOANs.Find(id);
+            if (nHOMTAIKHOAN == null)
             {
                 return HttpNotFound();
             }
-            return View(taikhoan);
+            return View(nHOMTAIKHOAN);
         }
 
-        // POST: /Admin/QLTaiKhoan/Delete/5
+        // POST: Admin/QLNhomTK/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            TAIKHOAN taikhoan = db.TAIKHOANs.Find(id);
-            db.TAIKHOANs.Remove(taikhoan);
+            //NHOMTAIKHOAN nHOMTAIKHOAN = db.NHOMTAIKHOANs.Find(id);
+            
+            //db.NHOMTAIKHOANs.Remove(nHOMTAIKHOAN);
+            db.XoaNhomTK(id);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

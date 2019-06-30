@@ -78,7 +78,7 @@
                             </div>
                             
                         </div>
-                        @ViewBag.DangKyThanhCong
+                        <p id="ThongBaoDangKy">@ViewBag.DangKyThanhCong</p>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input id="btnSubmit" type="submit" value="Đăng ký" class="btn btn-default" />
@@ -101,8 +101,26 @@
 </div>
 
 <style type="text/css">
-    .text-box single-line {
-        style: "margin: 10px 10px 10px 10px";
+    div.form-group {
+        
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    }
+    #btnSubmit{
+        
+    margin-left: 200px;
+    margin-top: 20px;
+    height: 35px;
+    width: 86px;
+
+    }
+    #ThongBaoDangKy{
+        
+    margin-left: 180px;
+    margin-top: 10px;
+    color:red;
+    font-size:medium;
     }
 
 </style>

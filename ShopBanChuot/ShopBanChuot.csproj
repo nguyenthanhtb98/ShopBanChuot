@@ -175,9 +175,10 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLDonHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLLoaiSPController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QLNhomTKController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLSPController.cs" />
-    <Compile Include="Areas\Admin\Controllers\QLTaiKhoanController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLThuongHieuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QLTKController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLXuatXuController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -529,11 +530,6 @@
     <Content Include="Areas\Admin\Views\QLXuatXu\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QLXuatXu\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QLXuatXu\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QLTaiKhoan\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QLTaiKhoan\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\QLTaiKhoan\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\QLTaiKhoan\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\QLTaiKhoan\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QLDonHang\Create.cshtml" />
     <Content Include="Areas\Admin\Views\QLDonHang\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QLDonHang\Details.cshtml" />
@@ -557,6 +553,16 @@
     <Content Include="Models\ShopBanChuotModel.edmx.diagram">
       <DependentUpon>ShopBanChuotModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\QLTK\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QLTK\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QLTK\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QLTK\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QLTK\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QLNhomTK\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QLNhomTK\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QLNhomTK\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QLNhomTK\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QLNhomTK\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
 }
 
-
+<h2>Quản lý tài khoản</h2>
 
 <p>
     @Html.ActionLink("Tạo mới", "Create")
@@ -32,6 +32,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NHOMTAIKHOAN.TenNhomTK)
         </th>
         <th></th>
     </tr>
@@ -60,9 +63,12 @@
             @Html.DisplayFor(modelItem => item.DiaChi)
         </td>
         <td>
-            @Html.ActionLink("Sửa", "Edit", new { id=item.TenTaiKhoan.Trim() }) |
-            @Html.ActionLink("Chi tiết", "Details", new { id=item.TenTaiKhoan.Trim() }) |
-            @Html.ActionLink("Xóa", "Delete", new { id=item.TenTaiKhoan.Trim() })
+            @Html.DisplayFor(modelItem => item.NHOMTAIKHOAN.TenNhomTK)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.TenTaiKhoan }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id=item.TenTaiKhoan }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.TenTaiKhoan })
         </td>
     </tr>
 }

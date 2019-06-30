@@ -110,8 +110,7 @@ namespace ShopBanChuot.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            LOAISANPHAM loaisanpham = db.LOAISANPHAMs.Find(id);
-            db.LOAISANPHAMs.Remove(loaisanpham);
+            db.XoaLoaiSP(id);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

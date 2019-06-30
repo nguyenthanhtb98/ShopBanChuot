@@ -220,5 +220,68 @@ namespace ShopBanChuot.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThemTaiKhoan", tenTKParameter, matKhauParameter, tenKHParameter, gTParameter, emailParameter, sDTParameter, diaChiParameter);
         }
+    
+        public virtual int XoaNhomTK(Nullable<int> maNhomTK)
+        {
+            var maNhomTKParameter = maNhomTK.HasValue ?
+                new ObjectParameter("MaNhomTK", maNhomTK) :
+                new ObjectParameter("MaNhomTK", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XoaNhomTK", maNhomTKParameter);
+        }
+    
+        public virtual int XoaDonHang(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XoaDonHang", idParameter);
+        }
+    
+        public virtual int XoaLoaiSP(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XoaLoaiSP", idParameter);
+        }
+    
+        public virtual int XoaThuongHieu(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XoaThuongHieu", idParameter);
+        }
+    
+        public virtual int XoaXuatXu(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XoaXuatXu", idParameter);
+        }
+    
+        public virtual int XoaSanPham(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XoaSanPham", idParameter);
+        }
+    
+        public virtual int XoaTK(string tentk)
+        {
+            var tentkParameter = tentk != null ?
+                new ObjectParameter("tentk", tentk) :
+                new ObjectParameter("tentk", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XoaTK", tentkParameter);
+        }
     }
 }

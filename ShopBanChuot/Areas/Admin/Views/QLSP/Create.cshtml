@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
 }
 
 <h2>Tạo mới</h2>
@@ -52,7 +52,7 @@
             @Html.LabelFor(model => model.Anh1, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*tên thẻ input file phải trùng với tên tham số bên controller*@
-                <input type="file" name="fileUpload1" value=" " />@ViewBag.ThongBaoAnh1
+                <input type="file" name="fileUpload1" value="" />@ViewBag.ThongBaoAnh1
             </div>
         </div>
 
@@ -60,7 +60,7 @@
             @Html.LabelFor(model => model.Anh2, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*tên thẻ input file phải trùng với tên tham số bên controller*@
-                <input type="file" name="fileUpload2" value=" " /> @ViewBag.ThongBaoAnh2
+                <input type="file" name="fileUpload2" value="" /> @ViewBag.ThongBaoAnh2
             </div>
         </div>
 
@@ -68,7 +68,7 @@
             @Html.LabelFor(model => model.Anh3, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*tên thẻ input file phải trùng với tên tham số bên controller*@
-                <input type="file" name="fileUpload3" value=" " /> @ViewBag.ThongBaoAnh3
+                <input type="file" name="fileUpload3" value="" /> @ViewBag.ThongBaoAnh3
             </div>
         </div>
 

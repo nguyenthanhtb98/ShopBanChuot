@@ -17,6 +17,7 @@ namespace ShopBanChuot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TAIKHOAN()
         {
+            this.MaNhomTK = 2;
             this.DONHANGs = new HashSet<DONHANG>();
         }
     

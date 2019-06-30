@@ -141,7 +141,7 @@ namespace ShopBanChuot.Controllers
             }
             db.SaveChanges();
             //đặt hàng thành công trả về thông báo thành công
-
+            
             return RedirectToAction("DonHangCuaToi");
         }
 
@@ -150,6 +150,7 @@ namespace ShopBanChuot.Controllers
         {
             List<ItemGioHang> listItemGioHang = LayGioHang();
             ViewBag.TongTien = TongTien(); // lưu giá trị tính toán tiền
+            Session["GioHang"] = null; // set lại giỏ trống
             return View(listItemGioHang);
         }
 	}

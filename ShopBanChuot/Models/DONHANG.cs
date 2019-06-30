@@ -17,6 +17,7 @@ namespace ShopBanChuot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DONHANG()
         {
+            this.TrangThai = 0;
             this.CHITIETDONHANGs = new HashSet<CHITIETDONHANG>();
         }
     
@@ -24,7 +25,7 @@ namespace ShopBanChuot.Models
         public string TenTaiKhoan { get; set; }
         public Nullable<System.DateTime> NgayDatHang { get; set; }
         public Nullable<System.DateTime> NgayGiaoHang { get; set; }
-        public Nullable<int> TrangThai { get; set; }
+        public int TrangThai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETDONHANG> CHITIETDONHANGs { get; set; }

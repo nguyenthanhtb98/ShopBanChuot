@@ -9,10 +9,17 @@
 
 <div>
     <h4>TAIKHOAN</h4>
-	<hr />
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.TenTaiKhoan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenTaiKhoan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MatKhau)
         </dt>
 
         <dd>
@@ -59,9 +66,17 @@
             @Html.DisplayFor(model => model.DiaChi)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.NHOMTAIKHOAN.TenNhomTK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHOMTAIKHOAN.TenNhomTK)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.TenTaiKhoan.Trim() }) |
-    @Html.ActionLink("Trở về", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TenTaiKhoan }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

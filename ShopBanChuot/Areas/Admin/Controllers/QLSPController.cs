@@ -22,7 +22,7 @@ namespace ShopBanChuot.Areas.Admin.Controllers
         public ActionResult Index(int page = 1)
         {
             int pagesize = 9; //1 trang có 9 cuốn
-            return View(db.SANPHAMs.OrderBy(n => n.TenSP).ToPagedList(page, pagesize));
+            return View(db.SANPHAMs.OrderBy(n => n.MaSP).ToPagedList(page, pagesize));
         }
         // GET: /QLSP/Details/5
         public ActionResult Details(int? id)
@@ -77,7 +77,6 @@ namespace ShopBanChuot.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-
                 // lưu tên của file
                 var filename1 = Path.GetFileName(fileUpload1.FileName);
                 var filename2 = Path.GetFileName(fileUpload2.FileName);
@@ -101,7 +100,7 @@ namespace ShopBanChuot.Areas.Admin.Controllers
                 }
                 else
                 {
-                    fileUpload1.SaveAs(path2);
+                    fileUpload2.SaveAs(path2);
                 }
                 if (System.IO.File.Exists(path3))
                 {
@@ -109,16 +108,17 @@ namespace ShopBanChuot.Areas.Admin.Controllers
                 }
                 else
                 {
-                    fileUpload1.SaveAs(path3);
+                    fileUpload3.SaveAs(path3);
                 }
                 //thêm vào cơ sở dữ liệu
-                    sanpham.Anh1 = path1;
-                    sanpham.Anh2 = path2;
-                    sanpham.Anh2 = path3;
-                    db.SANPHAMs.Add(sanpham);
-                    db.SaveChanges();
+                sanpham.Anh1 = "/Content/Images/" + filename1;
+                sanpham.Anh2 = "/Content/Images/" + filename2;
+                sanpham.Anh3 = "/Content/Images/" + filename3;
+                db.SANPHAMs.Add(sanpham);
+                db.SaveChanges();                
+                return RedirectToAction("Index");
             }
-            return View("Index", "QLSP", new { page = 1 });
+            return View();
         }
 
         // GET: /QLSP/Edit/5
@@ -180,8 +180,7 @@ namespace ShopBanChuot.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SANPHAM sanpham = db.SANPHAMs.Find(id);
-            db.SANPHAMs.Remove(sanpham);
+            db.XoaSanPham(id);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

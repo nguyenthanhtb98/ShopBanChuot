@@ -17,13 +17,13 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.MaDH)
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.TenTaiKhoan, "TenTaiKhoan", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("TenTaiKhoan", String.Empty)
                 @Html.ValidationMessageFor(model => model.TenTaiKhoan)
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.NgayDatHang, new { @class = "control-label col-md-2" })
